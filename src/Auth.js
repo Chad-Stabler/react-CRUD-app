@@ -14,6 +14,14 @@ export default function Auth({ setUser }) {
 
     setUser(user);
   }
+
+  async function signInSubmit(e) {
+    e.preventDefault();
+
+    const user = await signIn(signUpEmail, signUpPassword);
+
+    setUser(user);
+  }
   return (<>
     <h2>Your movie CRUD app</h2>
     <form onSubmit={signUpSubmit}>
@@ -27,6 +35,18 @@ export default function Auth({ setUser }) {
         <input value={signUpPassword} onChange={e => setSignUpPassword(e.target.value)} type='password' />
       </label>
       <button>Sign Up</button>
+    </form>
+    <form onSubmit={signInSubmit}>
+      <p>Sign In</p>
+      <label>
+            Email:
+        <input value={signInEmail} onChange={e => setSignInEmail(e.target.value)} type='email' />
+      </label>
+      <label>
+        Password:
+        <input value={signInPassword} onChange={e => setSignInPassword(e.target.value)} type='password' />
+      </label>
+      <button>Sign In</button>
     </form>
   </>);
 }
