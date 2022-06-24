@@ -1,17 +1,11 @@
-import React from './react';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
 import Auth from './Auth';
 import { useState } from 'react';
 import { client } from './services/client';
+import ListPage from './ListPage';
 
-function App() {
+export default function App() {
   const [user, setUser] = useState(client.auth.user());
   return (
     <Router>
@@ -22,10 +16,10 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/movies">To list</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to=""></Link>
             </li>
           </ul>
         </nav>
@@ -34,14 +28,13 @@ function App() {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
-            {
-              !user ? <Auth /> : <Redirect to='/movies' />
-            }
+            {!user ? <Auth setUser={setUser} /> : <Redirect to="/movies" />}
           </Route>
-          <Route >
-            {/* do later */}
-          </Route>
+          <Route>{/* do later */}</Route>
           <Route exact path="/movies">
+            {
+              user ? <ListPage /> : <Redirect to="/" />
+            }
             {/* do later */}
           </Route>
         </Switch>
@@ -49,5 +42,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;
