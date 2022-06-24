@@ -1,24 +1,52 @@
-import logo from './logo.svg';
+import React from './react';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect
+} from 'react-router-dom';
+import Auth from './Auth';
+import { useState } from 'react';
+import { client } from './services/client';
 
 function App() {
+  const [user, setUser] = useState(client.auth.user());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/users">Users</Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route exact path="/">
+            {
+              !user ? <Auth /> : <Redirect to='/movies' />
+            }
+          </Route>
+          <Route >
+            {/* do later */}
+          </Route>
+          <Route exact path="/movies">
+            {/* do later */}
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
