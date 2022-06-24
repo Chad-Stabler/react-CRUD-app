@@ -6,24 +6,37 @@ export default function Auth({ setUser }) {
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signInEmail, setSignInEmail] = useState('');
+  const [error, setError] = useState('');
 
   async function signUpSubmit(e) {
     e.preventDefault();
+    try {
+      const user = await signUp(signUpEmail, signUpPassword);
+      setUser(user);
+    } catch (e) {
+      setError(e.message);
+    }
 
-    const user = await signUp(signUpEmail, signUpPassword);
-
-    setUser(user);
   }
 
   async function signInSubmit(e) {
     e.preventDefault();
-
-    const user = await signIn(signUpEmail, signUpPassword);
-
-    setUser(user);
+    try {
+      const user = await signIn(signUpEmail, signUpPassword);
+    
+      setUser(user);        
+    } catch (e) {
+      setError(e.message);
+    }
   }
+
   return (<>
     <h2>Your movie CRUD app</h2>
+    {
+      error ?
+        <h1 className='error'>{error}</h1> :
+        <></>
+    }
     <form onSubmit={signUpSubmit}>
       <p>Sign Up</p>
       <label>
