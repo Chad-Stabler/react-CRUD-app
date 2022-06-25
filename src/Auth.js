@@ -22,7 +22,7 @@ export default function Auth({ setUser }) {
   async function signInSubmit(e) {
     e.preventDefault();
     try {
-      const user = await signIn(signUpEmail, signUpPassword);
+      const user = await signIn(signInEmail, signInPassword);
     
       setUser(user);        
     } catch (e) {

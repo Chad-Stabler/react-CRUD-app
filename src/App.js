@@ -4,9 +4,16 @@ import Auth from './Auth';
 import { useState } from 'react';
 import { client } from './services/client';
 import ListPage from './ListPage';
+import { logOut } from './services/fetch-utils';
 
 export default function App() {
   const [user, setUser] = useState(client.auth.user());
+
+  async function logout() {
+    await logOut();
+    setUser('');
+  }
+
   return (
     <Router>
       <div>
@@ -21,6 +28,11 @@ export default function App() {
             <li>
               <Link to=""></Link>
             </li>
+            {
+              user ? <li>
+                <button onClick={logout}>Logout</button>
+              </li> : <></>
+            }
           </ul>
         </nav>
 
