@@ -14,7 +14,7 @@ export default function ListPage() {
     fetch();
   }, []);
 
-  return (<div>
+  return (<div className='movies'>
     {
       movies.map((movie, i) => <Movie key={movie.Title + movie.director + i} movie={movie} />)
     }
