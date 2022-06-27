@@ -9,7 +9,6 @@ export async function getMovies() {
 export async function signUp(email, password) {
   const { user, error } = await client.auth.signUp({ email: email, password: password });
   if (error) {
-    console.error(error);
     throw error;
   } else return user;
 }
@@ -17,20 +16,21 @@ export async function signUp(email, password) {
 export async function signIn(email, password) {
   const { user, error } = await client.auth.signIn({ email: email, password: password });
   if (error) {
-    console.error(error);
     throw error;
   } else return user;
 }
 
 export async function logOut() {
   const { error } = await client.auth.signOut();
+  if (error) {
+    throw error;
+  }
 }
 
 export async function createMovie(movie) {
   const { data, error } = await client.from('movies').insert(movie).single();
 
   if (error) {
-    console.error(error);
     throw error;
   } else return data;
 }
@@ -39,7 +39,6 @@ export async function getMovieByID(id) {
   const { data, error } = await client.from('movies').select('*').match({ id }).single();
 
   if (error) {
-    console.error(error);
     throw error;
   } else return data;
 }
@@ -48,7 +47,6 @@ export async function deleteMovie(id) {
   const { data, error } = await client.from('movies').delete().match({ id }).single();
 
   if (error) {
-    console.error(error);
     throw error;
   } else return data;
 }
@@ -57,7 +55,6 @@ export async function updateMovie(movie, id) {
   const { data, error } = await client.from('movies').update(movie).match({ id }).single();
 
   if (error) {
-    console.error(error);
     throw error;
   } else return data;
 }
