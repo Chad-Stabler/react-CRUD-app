@@ -4,6 +4,7 @@ import Auth from './Auth';
 import { useState } from 'react';
 import { client } from './services/client';
 import ListPage from './ListPage';
+import Create from './Create';
 import { logOut } from './services/fetch-utils';
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
               <Link to="/movies">To list</Link>
             </li>
             <li>
-              <Link to=""></Link>
+              <Link to="/create">Add a movie</Link>
             </li>
             {
               user ? <li>
@@ -35,19 +36,21 @@ export default function App() {
             }
           </ul>
         </nav>
-
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/">
             {!user ? <Auth setUser={setUser} /> : <Redirect to="/movies" />}
           </Route>
-          <Route>{/* do later */}</Route>
           <Route exact path="/movies">
             {
               user ? <ListPage /> : <Redirect to="/" />
             }
-            {/* do later */}
+          </Route>
+          <Route exact path='/create'>
+            {
+              user ? <Create /> : <Redirect to="/" />
+            }
           </Route>
         </Switch>
       </div>

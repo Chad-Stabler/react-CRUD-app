@@ -1,9 +1,9 @@
-import { client, checkError } from './client';
+import { client } from './client';
 
 export async function getMovies() {
   const response = await client.from('movies').select('*');
 
-  return checkError(response);
+  return response.body;
 }
 
 export async function signUp(email, password) {
@@ -24,4 +24,10 @@ export async function signIn(email, password) {
 
 export async function logOut() {
   const { error } = await client.auth.signOut();
+}
+
+export async function createMovie(movie) {
+  const { data, error } = await client.from('movies').insert(movie).single();
+
+  return data;
 }
