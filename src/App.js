@@ -21,18 +21,26 @@ export default function App() {
       <div>
         <nav>
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/movies">To list</Link>
-            </li>
-            <li>
-              <Link to="/create">Add a movie</Link>
-            </li>
-            <li>
-              <Link to="/movies/0">Update a movie</Link>
-            </li>
+            {
+              user ? <li>
+                <Link to="/">Home</Link>
+              </li> : <></>
+            }
+            {
+              user ? <li>
+                <Link to="/movies">To list</Link>
+              </li> : <></>
+            }
+            {
+              user ? <li>
+                <Link to="/create">Add a movie</Link>
+              </li> : <></>
+            }
+            {
+              user ? <li>
+                <Link to="/movies/0">Update a movie</Link>
+              </li> : <></>
+            }
             {
               user ? <li>
                 <button onClick={logout}>Logout</button>

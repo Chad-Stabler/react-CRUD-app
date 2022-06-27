@@ -1,5 +1,13 @@
+body, html, #root, .App {
+  height: 100%;
+}
+
 .App {
   text-align: center;
+}
+
+body {
+  background-color: coral;
 }
 
 .App-logo {
@@ -35,4 +43,59 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+ul li {
+  list-style: none;
+  margin: 3px;
+  background-color: #282c34;
+  width: fit-content;
+  border-radius: 2px;
+  padding: 3px;
+}
+
+form label, form input {
+  margin: 5px;
+  color: #61dafb;
+}
+
+form input {
+  background-color: rgb(104, 71, 31);
+  border-radius: 2px;
+  border: 1px solid blue;
+}
+
+form button {
+  width: fit-content;
+  background-color: rgb(104, 71, 31);
+  color: #61dafb;
+  border: 1px solid blue;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  background-color: #282c34;
+  padding: 7px;
+  border-radius: 3px;
+}
+
+button {
+  background-color: #282c34;
+  color:#61dafb;
+  border-radius: 2px;
+  border: 1px solid purple;
+}
+
+ul button {
+  border: none;
+}
+
+li a {
+  color: #61dafb;
+}
+
+.movie {
+  color: #61dafb;
 }
