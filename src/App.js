@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { client } from './services/client';
 import ListPage from './ListPage';
 import Create from './Create';
+import Update from './Update';
 import { logOut } from './services/fetch-utils';
 
 export default function App() {
@@ -29,6 +30,9 @@ export default function App() {
             <li>
               <Link to="/create">Add a movie</Link>
             </li>
+            <li>
+              <Link to="/movies/0">Update a movie</Link>
+            </li>
             {
               user ? <li>
                 <button onClick={logout}>Logout</button>
@@ -50,6 +54,11 @@ export default function App() {
           <Route exact path='/create'>
             {
               user ? <Create /> : <Redirect to="/" />
+            }
+          </Route>
+          <Route exact path="/movies/:id">
+            {
+              user ? <Update /> : <Redirect to="/" />
             }
           </Route>
         </Switch>

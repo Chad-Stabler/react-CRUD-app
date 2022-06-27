@@ -6,12 +6,12 @@ export default function Create() {
   const { push } = useHistory();
   const [title, setTitle] = useState('');
   const [director, setDirector] = useState('');
-  const [releaseDate, setReleaseDate] = useState('');
+  const [release_date, setReleaseDate] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const movie = { title: title, director: director, release_date: releaseDate };
+    const movie = { Title: title, director: director, release_date: release_date };
 
     await createMovie(movie);
 
@@ -35,7 +35,7 @@ export default function Create() {
       </label>
       <label>
         Release Date:
-        <input value={releaseDate} onChange={e => setReleaseDate(e.target.value)} />
+        <input value={release_date} onChange={e => setReleaseDate(e.target.value)} />
       </label>
       <button>Add movie</button>
     </form>

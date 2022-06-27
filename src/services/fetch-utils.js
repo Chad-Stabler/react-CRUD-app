@@ -29,5 +29,35 @@ export async function logOut() {
 export async function createMovie(movie) {
   const { data, error } = await client.from('movies').insert(movie).single();
 
-  return data;
+  if (error) {
+    console.error(error);
+    throw error;
+  } else return data;
+}
+
+export async function getMovieByID(id) {
+  const { data, error } = await client.from('movies').select('*').match({ id }).single();
+
+  if (error) {
+    console.error(error);
+    throw error;
+  } else return data;
+}
+
+export async function deleteMovie(id) {
+  const { data, error } = await client.from('movies').delete().match({ id }).single();
+
+  if (error) {
+    console.error(error);
+    throw error;
+  } else return data;
+}
+
+export async function updateMovie(movie, id) {
+  const { data, error } = await client.from('movies').update(movie).match({ id }).single();
+
+  if (error) {
+    console.error(error);
+    throw error;
+  } else return data;
 }
